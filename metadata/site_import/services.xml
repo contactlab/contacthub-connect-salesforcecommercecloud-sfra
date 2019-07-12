@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+
+    <service-profile service-profile-id="ContactLabHub">
+        <timeout-millis>2000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="plugin_contactlab.http.customers.get">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ContactLabHub</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ContactLabHub</profile-id>
+        <credential-id/>
+    </service>
+
+    <service service-id="plugin_contactlab.http.customers.patch">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ContactLabHub</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ContactLabHub</profile-id>
+        <credential-id/>
+    </service>
+
+    <service service-id="plugin_contactlab.http.customers.post">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ContactLabHub</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ContactLabHub</profile-id>
+        <credential-id/>
+    </service>
+
+    <service service-id="plugin_contactlab.http.customerssessions.post">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ContactLabHub</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ContactLabHub</profile-id>
+        <credential-id/>
+    </service>
+
+    <service service-id="plugin_contactlab.http.customerssubscriptions.post">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ContactLabHub</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ContactLabHub</profile-id>
+        <credential-id/>
+    </service>
+
+    <service service-id="plugin_contactlab.http.events.post">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ContactLabHub</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ContactLabHub</profile-id>
+        <credential-id/>
+    </service>
+
+</services>

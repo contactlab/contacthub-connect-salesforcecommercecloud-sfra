@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="OrganizationPreferences"/>
+
+    <type-extension type-id="Profile">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="chId">
+                <display-name xml:lang="x-default">ContactHub Id</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="chLastSyncDate">
+                <display-name xml:lang="x-default">ContactHub Last Sync Date</display-name>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="ContactHub">
+                <display-name xml:lang="x-default">Contact Hub</display-name>
+                <attribute attribute-id="chLastSyncDate"/>
+                <attribute attribute-id="chId"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="BaseCartridge">
+                <display-name xml:lang="x-default">Base Cartridge</display-name>
+                <description xml:lang="x-default">Cartridge that contains the Account controller</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>app_storefront_controllers</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="BaseCartridgeController">
+                <display-name xml:lang="x-default">Base Cartridge Controller</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>sitegenesis_storefront_controllers</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="BaseCartridgeCore">
+                <display-name xml:lang="x-default">Base Cartridge Core</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>sitegenesis_storefront_core</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabHubNode">
+                <display-name xml:lang="x-default">ContactLab Hub Node</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabHubToken">
+                <display-name xml:lang="x-default">ContactLab Hub Authorization Token</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabHubTokenJs">
+                <display-name xml:lang="x-default">ContactLab Hub Authorization Token (Frontend - Untrusted)</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabHubURL">
+                <display-name xml:lang="x-default">ContactLab Hub Base URL</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>https://api.contactlab.it/hub/v1/workspaces/</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabHubWorkspace">
+                <display-name xml:lang="x-default">ContactLab Hub Workspace</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabSubscriptionID">
+                <display-name xml:lang="x-default">Contact Lab Subscription ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabSubscriptionName">
+                <display-name xml:lang="x-default">Contact Lab Subscription Name</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabSubscriptionOnlyRegistered">
+                <display-name xml:lang="x-default">Contact Lab Subscription Only Registered</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="ContactLabSubscriptionType">
+                <display-name xml:lang="x-default">Contact Lab Subscription Type</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="EnableJs">
+                <display-name xml:lang="x-default">Enable JavaScript Events</display-name>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="EnableJsViewPDP">
+                <display-name xml:lang="x-default">Enable JavaScript Event for View Product</display-name>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="EnableJsCartAdd">
+                <display-name xml:lang="x-default">Enable JavaScript Event for Add to Cart</display-name>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="EnableJsCartRemove">
+                <display-name xml:lang="x-default">Enable JavaScript Events for Remove from Cart</display-name>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="ContactLabHubConfigs">
+                <display-name xml:lang="x-default">ContactLab Hub Configurations</display-name>
+                <attribute attribute-id="ContactLabHubURL"/>
+                <attribute attribute-id="ContactLabHubToken"/>
+                <attribute attribute-id="ContactLabHubWorkspace"/>
+                <attribute attribute-id="ContactLabHubNode"/>
+                <attribute attribute-id="BaseCartridge"/>
+                <attribute attribute-id="ContactLabHubTokenJs"/>
+                <attribute attribute-id="EnableJs"/>
+                <attribute attribute-id="EnableJsViewPDP"/>
+                <attribute attribute-id="EnableJsCartAdd"/>
+                <attribute attribute-id="EnableJsCartRemove"/>
+            </attribute-group>
+            <attribute-group group-id="ContactLabSubscriptions">
+                <display-name xml:lang="x-default">ContactLab Subscriptions</display-name>
+                <attribute attribute-id="ContactLabSubscriptionOnlyRegistered"/>
+                <attribute attribute-id="ContactLabSubscriptionID"/>
+                <attribute attribute-id="ContactLabSubscriptionType"/>
+                <attribute attribute-id="ContactLabSubscriptionName"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>
