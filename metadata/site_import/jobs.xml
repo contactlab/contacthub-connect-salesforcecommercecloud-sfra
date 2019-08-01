@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+
+    <job job-id="ContactHub CustomerSyncronisation" priority="0">
+        <description>Customer Sync</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="Sync customers" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">plugin_contactlab/cartridge/scripts/jobs/CHCustomerSyncronisation</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">execute</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">false</parameter>
+                    <parameter name="toDays">1</parameter>
+                    <parameter name="fromDays">3</parameter>
+                    <parameter name="dryRun">TRUE</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2019-07-11Z</date>
+                <time>14:05:44.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+</jobs>

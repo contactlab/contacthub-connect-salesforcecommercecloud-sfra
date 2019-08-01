@@ -27,7 +27,7 @@ function sendGuestCustomer(email: String, firstName: String, lastName: String, c
     postCustomer.base.subscriptions = subscriptionSections;
   }
   // Finally
-  return sendPostCustomer(postCustomer);
+  return sendPostCustomer(postCustomer, customer);
 }
 
 function sendCustomer(customer : dw.customer.Customer, consentsSection, subscriptionSections) : dw.svc.Result {
@@ -42,10 +42,10 @@ function sendCustomer(customer : dw.customer.Customer, consentsSection, subscrip
   // Sent to Hub
   // let result : dw.svc.Result = Hub.postCustomer(postCustomer);
 
-  return sendPostCustomer(postCustomer);
+  return sendPostCustomer(postCustomer, customer);
 }
 
-function sendPostCustomer(postCustomer: Object) {
+function sendPostCustomer(postCustomer: Object, customer: dw.customer.Customer) {
   // Sent to Hub
   let result: dw.svc.Result = CHServicesHelper.postCustomer(postCustomer);
 
@@ -66,6 +66,8 @@ function sendPostCustomer(postCustomer: Object) {
     let patchCustomer = buildPatchCustomerFromPost(postCustomer);
     result = CHServicesHelper.patchCustomer(chId, patchCustomer);
     updateFieldsForCustomer(customer, { chId: chId });
+  } else {
+    Logger.error("Contact Hub returning an error {0}", result.getError());
   }
   return result;
 }
@@ -111,27 +113,30 @@ function updateFieldsForCustomer(customer : dw.customer.Customer, customAttribut
 	}
 }
 
-function updateFieldsForProfile(profile : dw.customer.Profile, customAttributes : Object) : void {
-	if (profile != null) {
-		customAttributes = customAttributes || {};
-		Transaction.wrap(function() {
-			for (let i in customAttributes) {
-				if (customAttributes.hasOwnProperty(i)) {
-					profile.custom[i] = customAttributes[i];
-				}
-			}
-			profile.custom.chLastSyncDate = new Date();
-		});
-	}
+function updateFieldsForProfile(profile: dw.customer.Profile, customAttributes: Object): void {
+  if (profile != null) {
+    customAttributes = customAttributes || {};
+    Transaction.wrap(function () {
+      for (let i in customAttributes) {
+        if (customAttributes.hasOwnProperty(i)) {
+          Logger.debug("Update custom attribute {0} -> {1}", profile.custom[i], customAttributes[i])
+          profile.custom[i] = customAttributes[i];
+        }
+      }
+      profile.custom.chLastSyncDate = new Date();
+    });
+  } else {
+    Logger.error("Cannot update custom attribute chId: profile is NULL")
+  }
 }
 
-function relateSessionId(chId : String, dwId : String) : dw.svc.Result {
-	let result : dw.svc.Result = CHServicesHelper.postSubscription({
-		id: chId,
-		value: dwId
-	});
-	Logger.debug('Relate session: {0}', JSON.stringify(result.getObject()));
-	return result;
+function relateSessionId(chId: String, dwId: String): dw.svc.Result {
+  let result: dw.svc.Result = CHServicesHelper.postSubscription({
+    id: chId,
+    value: dwId
+  });
+  Logger.debug('Relate session: {0}', JSON.stringify(result.getObject()));
+  return result;
 }
 
 function sendSubscription(subscription: Object) : dw.svc.Result {
