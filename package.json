@@ -1,6 +1,6 @@
 {
   "name": "plugin_contactlab_sfra3",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "New overlay cartridge",
   "main": "index.js",
   "scripts": {
