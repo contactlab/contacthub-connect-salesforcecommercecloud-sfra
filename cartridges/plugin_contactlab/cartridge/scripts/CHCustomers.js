@@ -46,8 +46,9 @@ function sendCustomer(customer : dw.customer.Customer, consentsSection, subscrip
 }
 
 function sendPostCustomer(postCustomer: Object, customer: dw.customer.Customer) {
+  let postprocessedPostcustomer = callPostprocessHookIfDefined('plugin_contactlab.customer.send', 'postprocess', postCustomer);
   // Sent to Hub
-  let result: dw.svc.Result = CHServicesHelper.postCustomer(postCustomer);
+  let result: dw.svc.Result = CHServicesHelper.postCustomer(postprocessedPostcustomer);
 
   // Check Results
   Logger.info(
@@ -63,7 +64,7 @@ function sendPostCustomer(postCustomer: Object, customer: dw.customer.Customer) 
   } else if (result.getError() == 409) {
     // Error!
     let chId = JSON.parse(result.getErrorMessage()).data.customer.id;
-    let patchCustomer = buildPatchCustomerFromPost(postCustomer);
+    let patchCustomer = buildPatchCustomerFromPost(postprocessedPostcustomer);
     result = CHServicesHelper.patchCustomer(chId, patchCustomer);
     updateFieldsForCustomer(customer, { chId: chId });
   } else {
@@ -140,14 +141,10 @@ function relateSessionId(chId: String, dwId: String): dw.svc.Result {
 }
 
 function sendSubscription(subscription: Object) : dw.svc.Result {
-  dw.system.Logger.getLogger("MFAB", "sendSubscription").error("Sending new Subscription [start]")
-
   // Incoming object is a PostSubscription
   let postSubscription = subscription;
 
-  dw.system.Logger.getLogger("MFAB", "sendSubscription").error("Sending new Subscription [send]")
   let result : dw.svc.Result = CHServicesHelper.postSubscription(postSubscription.subscriberId, postSubscription);
-  dw.system.Logger.getLogger("MFAB", "sendSubscription").error("Sending new Subscription [done]")
 	return result;
 }
 
@@ -169,17 +166,28 @@ function syncAllCustomers() : void {
 	CustomerMgr.processProfiles(syncProfile, "lastModified <= {0}", lastDate);
 }
 
-function syncProfile(profile : dw.customer.Profile, consentsSection, subscriptionSections) : void {
-	let condition : Boolean = profile.custom.chLastSyncDate == null
-	    || (profile.getLastModified().getTime() >= profile.custom.chLastSyncDate.getTime());
-	if (condition) {
-	    let postCustomer = buildPostCustomerFromProfile(profile);
-	    let patchCustomer = buildPatchCustomerFromPost(postCustomer);
-	    let result : dw.svc.Result = CHServicesHelper.patchCustomer(profile.custom.chId, patchCustomer);
-	    updateFieldsForProfile(profile, {chId: profile.custom.chId});
-	}
+function syncProfile(profile: dw.customer.Profile, consentsSection, subscriptionSections): void {
+  let condition: Boolean = profile.custom.chLastSyncDate == null
+    || (profile.getLastModified().getTime() >= profile.custom.chLastSyncDate.getTime());
+
+  if (condition) {
+    let postCustomer = buildPostCustomerFromProfile(profile);
+    let patchCustomer = buildPatchCustomerFromPost(postCustomer);
+
+    let postprocessedPatchCustomer = callPostprocessHookIfDefined('plugin_contactlab.customer.sync', 'postprocess', patchCustomer);
+    let result: dw.svc.Result = CHServicesHelper.patchCustomer(profile.custom.chId, postprocessedPatchCustomer);
+    updateFieldsForProfile(profile, { chId: profile.custom.chId });
+  }
 }
 
+function callPostprocessHookIfDefined(hookName: String, hookMethod: String, postCustomer) {
+  Logger.debug("Check for Hook {0}", hookName)
+  if (dw.system.HookMgr.hasHook(hookName)) {
+    Logger.error("Hook {0} Found. Apply!", hookName)
+    postCustomer = dw.system.HookMgr.callHook(hookName, hookMethod, postCustomer);
+  }
+  return postCustomer;
+}
 
 exports.relateSessionId = relateSessionId;
 
