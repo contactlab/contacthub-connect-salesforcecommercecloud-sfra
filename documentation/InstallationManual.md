@@ -82,8 +82,8 @@ For example:
 ```js
 exports.postprocess = function(postCustomer) {
 
-  postCustomer.extend = {};
-  postCustomer.extend.LANGUAGE = 'IT';
+  postCustomer.extended = {};
+  postCustomer.extended.LANGUAGE = 'IT';
 
   return postCustomer;
 }
