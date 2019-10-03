@@ -38,6 +38,7 @@ function sendCompletedOrder(customerId: String, order: dw.order.Order): Result {
             orderId: order.getOrderNo(),
             type: 'sale',
             paymentMethod: getPaymentMethod(paymentInstrument.getPaymentMethod()),
+            storeCode: dw.system.Site.getCurrent().getID(),
             amount: {
             	local: {
             		currency: order.getCurrencyCode()
